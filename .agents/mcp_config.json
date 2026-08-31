@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "kisa-compliance-checker": {
+      "command": "node",
+      "args": [
+        "/Users/u085/Desktop/dev/KISA-Secure-Coding-Checker/dist/index.js"
+      ],
+      "env": {
+        "LLM_PROVIDER": "none",
+        "AUTO_SYNC_ENABLED": "true"
+      }
+    }
+  }
+}

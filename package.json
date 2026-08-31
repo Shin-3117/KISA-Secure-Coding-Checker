@@ -1,0 +1,29 @@
+{
+  "name": "kisa-secure-coding-checker",
+  "version": "1.0.0",
+  "description": "KISA Compliance & Secure Coding Assistant MCP Server",
+  "main": "dist/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "node dist/index.js",
+    "db:ingest": "node dist/scripts/buildSeedDb.js",
+    "db:sync": "node dist/scripts/syncKisaDocs.js",
+    "test": "node --test dist/tests/*.test.js"
+  },
+  "keywords": [
+    "mcp",
+    "kisa",
+    "secure-coding",
+    "compliance",
+    "security-review",
+    "personal-data-protection"
+  ],
+  "author": "Antigravity Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.10",
+    "typescript": "^5.7.3"
+  }
+}

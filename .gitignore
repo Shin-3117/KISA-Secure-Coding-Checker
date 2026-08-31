@@ -1,0 +1,69 @@
+# Node.js & Dependency Directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Build & Compilation Outputs
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# SQLite Database & Data Caches
+# Note: Dynamic SQLite DB generated during runtime or db:ingest
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+data/*.sqlite
+data/*.sqlite3
+!data/.gitkeep
+
+# Environment & Credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# Logs & Temporary Files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+tmp/
+temp/
+downloads/
+.cache/
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+.jest/
+
+# OS Specific Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs & Code Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo

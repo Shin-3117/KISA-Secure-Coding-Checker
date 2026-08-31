@@ -166,7 +166,7 @@
 ### 2. 저장소 클론 및 패키지 설치
 
 ```bash
-git clone https://github.com/your-org/KISA-Secure-Coding-Checker.git
+git clone https://github.com/Shin-3117/KISA-Secure-Coding-Checker.git
 cd KISA-Secure-Coding-Checker
 npm install
 ```

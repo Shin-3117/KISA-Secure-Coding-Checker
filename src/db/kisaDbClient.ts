@@ -91,6 +91,28 @@ export class KisaDbClient {
   }
 
   /**
+   * KISA 수집 문서 삽입 / 갱정
+   */
+  public insertDocument(doc: KisaDocument): number {
+    const existing = this.db.prepare(`SELECT id FROM kisa_documents WHERE source_url = ? OR title = ?;`).get(doc.source_url || '', doc.title) as any;
+    if (existing) {
+      this.db.prepare(`
+        UPDATE kisa_documents
+        SET category = ?, title = ?, pub_date = ?, source_url = ?, file_type = ?
+        WHERE id = ?;
+      `).run(doc.category, doc.title, doc.pub_date, doc.source_url, doc.file_type, existing.id);
+      return existing.id;
+    } else {
+      const stmt = this.db.prepare(`
+        INSERT INTO kisa_documents (category, title, pub_date, source_url, file_type)
+        VALUES (?, ?, ?, ?, ?);
+      `);
+      const res = stmt.run(doc.category, doc.title, doc.pub_date, doc.source_url, doc.file_type);
+      return Number(res.lastInsertRowid);
+    }
+  }
+
+  /**
    * 조항 데이터 삽입 및 FTS 인덱싱
    */
   public insertSection(section: KisaSection): void {

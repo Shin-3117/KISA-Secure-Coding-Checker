@@ -9,15 +9,17 @@ export async function handleSyncDb(args: SyncDbArgs): Promise<{ content: Array<{
   const forceFullSync = args.force_full_sync === true;
   const result = await syncKisaDocs(forceFullSync);
 
-  let markdown = `## 🔄 KISA 지식 DB 동기화 완료 리포트\n\n`;
-  markdown += `- **동기화 상태**: ${result.status === 'SUCCESS' ? '✅ 성공' : '❌ 실패'}\n`;
-  markdown += `- **새로 추가/갱신된 항목**: ${result.updated}개\n`;
+  let markdown = `## 🔄 KISA 지식 DB 실시간 동기화 리포트\n\n`;
+  markdown += `- **동기화 상태**: ${result.status === 'SUCCESS' ? '✅ 성공 (KISA 공식 웹서버연동)' : '❌ 실패'}\n`;
+  markdown += `- **실시간 수집/갱신 문서 수**: ${result.updated}개\n`;
+  markdown += `- **세부 사항**: ${result.details || 'N/A'}\n`;
   markdown += `- **수행 시각**: ${new Date().toLocaleString('ko-KR')}\n\n`;
 
   const dbClient = new KisaDbClient();
   const stats = dbClient.getStats();
   markdown += `### 📊 동기화 후 DB 통계 정보\n`;
-  markdown += `- **총 저장된 KISA 조항 수**: ${stats.total_rules}개\n`;
+  markdown += `- **총 저장된 KISA 문서 수**: ${stats.total_documents}개\n`;
+  markdown += `- **총 수록 보안 조항 수**: ${stats.total_rules}개\n`;
   markdown += `- **마지막 갱신 시각**: ${stats.last_sync}\n`;
   markdown += `- **DB 파일 위치**: \`${stats.db_path}\` \n`;
 
@@ -37,8 +39,9 @@ export function handleCheckDbStatus(): { content: Array<{ type: 'text'; text: st
   const stats = dbClient.getStats();
 
   let markdown = `## 📊 KISA 지식 DB 상태 및 버전 리포트\n\n`;
-  markdown += `- **총 수록 조항 수**: ${stats.total_rules}개\n`;
-  markdown += `- **마지막 백그라운드 동기화**: ${stats.last_sync}\n`;
+  markdown += `- **총 KISA 공식 문서 수**: ${stats.total_documents}개\n`;
+  markdown += `- **총 수록 보안 조항 수**: ${stats.total_rules}개\n`;
+  markdown += `- **마지막 실시간 동기화**: ${stats.last_sync}\n`;
   markdown += `- **자동 동기화 설정 (AUTO_SYNC)**: ${process.env.AUTO_SYNC_ENABLED === 'false' ? '🔴 비활성화 (오프라인 모드)' : '🟢 활성화 (주기적 갱신)'}\n`;
   markdown += `- **DB 파일 경로**: \`${stats.db_path}\` \n\n`;
 
